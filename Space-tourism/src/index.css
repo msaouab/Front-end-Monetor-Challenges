@@ -1,0 +1,24 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Bellefair&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200&family=Bellefair&display=swap');
+:root {
+	font-family: 'Bellefair', serif;
+	--BackColor: #0B0D17;
+	--PrimaryColor: #fff;
+	--LastColor: #D0D6F9;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.debug {
+	border: 1px solid red;
+	& > * {
+		border: 1px solid green;
+		& > * {
+			border: 1px solid blue;
+		}
+	}
+}
