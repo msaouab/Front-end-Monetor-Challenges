@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
 import BackDesk from "./assets/pattern-bg-desktop.png";
 import Info from "./Info";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import axios from "axios";
 
 const HeadContainer = styled.div`
 	background-image: url(${BackDesk});
@@ -60,9 +61,48 @@ const HeadContainer = styled.div`
 	}
 `;
 
+interface InfoData {
+	ip: string;
+	isp: string;
+	location: {
+		country: string;
+		region: string;
+		city: string;
+		lat: number;
+		lng: number;
+		postalCode: string;
+		timezone: string;
+		geonameId: number;
+	};
+}
+
 const Head = () => {
 	const [search, setSearch] = useState("");
-	const [Ip, setIp] = useState("");
+	const [Ip, setIp] = useState("192.212.174.101");
+
+	const [data, setData] = useState<InfoData | null>(null);
+
+	const isValidIpAddress = (ipaddress: string) => {
+		const ipformat = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
+		if (ipaddress.match(ipformat)) {
+			return true;
+		}
+	};
+
+	useEffect(() => {
+		if (!Ip || !isValidIpAddress(Ip)) return;
+		console.log(Ip)
+		axios
+			.get(
+				`https://geo.ipify.org/api/v2/country,city?apiKey=at_1AEOTEng3zs2v9Wm9IHoY6VH1rZPs&ipAddress=${Ip}`
+			)
+			.then((res) => {
+				setData(res.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [Ip]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
@@ -94,7 +134,7 @@ const Head = () => {
 					</button>
 				</form>
 			</header>
-			<Info Ip={Ip}/>
+			<Info ip={data?.ip} isp={data?.isp} location={data?.location}/>
 		</HeadContainer>
 	);
 };

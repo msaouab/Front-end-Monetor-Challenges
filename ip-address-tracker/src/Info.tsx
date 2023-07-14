@@ -1,5 +1,3 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const InfoContainer = styled.ul`
@@ -33,12 +31,10 @@ const InfoContainer = styled.ul`
 	}
 `;
 
-// const Ip = "192.123.33.3";
-
 interface InfoData {
-	ip: string;
-	isp: string;
-	location: {
+	ip?: string;
+	isp?: string;
+	location?: {
 		country: string;
 		region: string;
 		city: string;
@@ -50,64 +46,37 @@ interface InfoData {
 	};
 }
 
-interface InfoProps {
-	Ip: string;
-}
+const Info: React.FC<InfoData> = ({ip, isp, location }) => {
 
-const Info: React.FC<InfoProps> = ({Ip}) => {
-	const [data, setData] = useState<InfoData | null>(null);
-
-	const isValidIpAddress = (ipaddress: string) => {
-		const ipformat = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
-		if (ipaddress.match(ipformat)) {
-			return true;
-		}
-	};
-
-	useEffect(() => {
-		if (!Ip || !isValidIpAddress(Ip)) return;
-		console.log("this is the ip:", Ip);
-		axios
-			.get(
-				`https://geo.ipify.org/api/v2/country,city?apiKey=at_1AEOTEng3zs2v9Wm9IHoY6VH1rZPs&ipAddress=${Ip}`
-			)
-			.then((res) => {
-				setData(res.data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, [Ip]);
-
-	if (!data) return <div>Loading...</div>;
+	const {region, city, timezone} = location || {};
 
 	return (
 		<InfoContainer>
 			<li>
 				<div className="text Ip">
 					IP Address
-					<span className="value IpValue">{data.ip}</span>
+					{ip && <span className="value IpValue">{ip}</span>}
 				</div>
 				<div className="line"></div>
 			</li>
 			<li>
 				<div className="text Loc">
 					Location
-					<span className="value LocValue">{`${data.location.region}, ${data.location.city}`}</span>
+					{region && city && <span className="value LocValue">{`${region}, ${city}`}</span>}
 				</div>
 				<div className="line"></div>
 			</li>
 			<li>
 				<div className="text Time">
 					Timezone
-					<span className="value TimeValue">{`UTC${data.location.timezone}`}</span>
+					{timezone && <span className="value TimeValue">{`UTC${timezone}`}</span>}
 				</div>
 				<div className="line"></div>
 			</li>
 			<li>
 				<div className="text Isp">
 					ISP
-					<span className="value IspValue">{`${data.isp}`}</span>
+					{isp && <span className="value IspValue">{`${isp}`}</span>}
 				</div>
 			</li>
 		</InfoContainer>
