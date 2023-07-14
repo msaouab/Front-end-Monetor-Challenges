@@ -4,6 +4,7 @@ import Info from "./Info";
 import { useEffect, useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import axios from "axios";
+import { AppContext } from "./AppContext";
 
 const HeadContainer = styled.div`
 	background-image: url(${BackDesk});
@@ -79,6 +80,7 @@ interface InfoData {
 const Head = () => {
 	const [search, setSearch] = useState("");
 	const [Ip, setIp] = useState("192.212.174.101");
+	const { setPosition } = AppContext
 
 	const [data, setData] = useState<InfoData | null>(null);
 
@@ -98,6 +100,7 @@ const Head = () => {
 			)
 			.then((res) => {
 				setData(res.data);
+				setPosition([res.data.location.lat, res.data.location.lng]);
 			})
 			.catch((err) => {
 				console.log(err);
