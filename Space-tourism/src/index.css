@@ -1,17 +1,237 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Bellefair&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200&family=Bellefair&display=swap');
+/* ------------------------------- */
+/*             Reset               */
+/* ------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&display=swap");
+
 :root {
-	font-family: 'Bellefair', serif;
-	--BackColor: #0B0D17;
-	--PrimaryColor: #fff;
-	--LastColor: #D0D6F9;
+	--clr-dark: 230 35% 7%;
+	--clr-light: 231 77% 90%;
+	--clr-white: 0 0% 100%;
+
+	--fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
+	--fs-800: 3.5rem;
+	--fs-700: 1.5rem;
+	--fs-600: 1rem;
+	--fs-500: 1.75rem;
+	--fs-400: 0.9375rem;
+	--fs-300: 1rem;
+	--fs-200: 0.875rem;
+
+	--ff-serif: "Bellefair", serif;
+	--ff-sans-cond: "Barlow Condensed", sans-serif;
+	--ff-sans-normal: "Barlow", sans-serif;
+}
+
+@media (min-width: 35em) {
+	:root {
+		--fs-800: 5rem;
+		--fs-700: 2.5rem;
+		--fs-600: 1.5rem;
+		--fs-400: 1rem;
+	}
+}
+
+@media (min-width: 45em) {
+	:root {
+		/* font-sizes */
+		--fs-800: 6.25rem;
+		--fs-700: 3.5rem;
+		--fs-600: 2rem;
+		--fs-400: 1.125rem;
+	}
 }
 
 * {
 	margin: 0;
 	padding: 0;
+}
+
+.gb-dark {
+	background-color: hsl(var(--clr-dark));
+}
+
+.gb-light {
+	background-color: hsl(var(--clr-light));
+}
+
+.gb-white {
+	background-color: hsl(var(--clr-white));
+}
+
+.txt-color-dark {
+	color: hsl(var(--clr-dark));
+}
+
+.txt-color-light {
+	color: hsl(var(--clr-light));
+}
+
+.txt-color-white {
+	color: hsl(var(--clr-white));
+}
+
+/* Box sizing */
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 }
+
+/* Reset margin and padding */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure,
+picture,
+blockquote,
+dl,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	font-weight: 400;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+}
+
+/* Remove Decoration on Links */
+a {
+	text-decoration: none;
+}
+
+body {
+	font-family: var(--ff-sans-normal);
+	font-size: var(--fs-400);
+	color: var(--clr-white);
+	background-color: hsl(var(--clr-dark));
+	line-height: 1.5;
+	min-height: 100vh;
+	display: grid;
+	grid-template-rows: min-content 1fr;
+}
+
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* make forms element easier to work with */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+/* Remove animation for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+.flex {
+	display: flex;
+	gap: var(--gap, 1rem);
+}
+
+.flex.even-columns > * {
+	width: 100%;
+	outline: 1px solid limegreen;
+}
+
+.grid {
+	display: grid;
+	gap: var(--gap, 1rem);
+}
+
+.container {
+	padding-inline: 2em;
+	margin-inline: auto;
+	max-width: 80rem;
+}
+
+.grid-container {
+	text-align: center;
+	display: grid;
+	place-items: center;
+	padding-inline: 1rem;
+}
+
+.grid-container * {
+	max-width: 50ch;
+}
+
+@media (min-width: 45em) {
+	.grid-container {
+		text-align: left;
+		column-gap: var(--container-gap, 2rem);
+		grid-template-columns: minmax(1rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(
+				1rem,
+				1fr
+			);
+	}
+
+	.grid-container > *:first-child {
+		grid-column: 2;
+	}
+
+	.grid-container > *:last-child {
+		grid-column: 3;
+	}
+	.grid-container--home {
+		padding-bottom: max(6rem, 20vh);
+		align-items: end;
+	}
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap; /* added line */
+	border: 0;
+}
+
+.box {
+	background: lightblue;
+	padding: 3rem;
+}
+
+.call-to-action {
+	--gap: rem;
+	background: pink;
+	padding: 2rem;
+	border-radius: 1rem;
+}
+
+/* --------------- testing ---------------- */
 
 .debug {
 	border: 1px solid red;

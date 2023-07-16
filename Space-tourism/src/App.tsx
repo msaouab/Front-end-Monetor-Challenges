@@ -3,7 +3,9 @@ import styled from "styled-components";
 import NavBar from "./NavBar";
 import Home from "./Home";
 
-const AppContainer = styled.div``;
+const AppContainer = styled.div`
+	/* height: 100vh; */
+`;
 
 const RoutesStyle = styled.div``;
 
@@ -11,14 +13,9 @@ function AppRouter() {
 	return (
 		<BrowserRouter>
 			<RoutesStyle>
-				<header>
-					<NavBar />
-				</header>
-				<main>
-					<Routes>
-						<Route path="/" element={<Home />} />
-					</Routes>
-				</main>
+				<Routes>
+					<Route path="/" element={<Home />} />
+				</Routes>
 			</RoutesStyle>
 		</BrowserRouter>
 	);
@@ -27,7 +24,10 @@ function AppRouter() {
 function App() {
 	return (
 		<AppContainer>
-			<AppRouter />
+			<header>
+				<NavBar />
+			</header>
+				<AppRouter />
 		</AppContainer>
 	);
 }
