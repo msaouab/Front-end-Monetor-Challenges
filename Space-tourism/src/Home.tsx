@@ -30,7 +30,7 @@ const HomeStyle = styled.main`
 		}
 		.linkExplore {
 			& > a {
-				position: relative;
+				/* position: relative; */
 				z-index: 1;
 				display: inline-grid;
 				place-items: center;
