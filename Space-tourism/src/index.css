@@ -231,6 +231,27 @@ select {
 	border-radius: 1rem;
 }
 
+.primary-navigation {
+    --underline-gap: 2rem;
+    position: fixed;
+    z-index: 1000;
+    inset: 0 0 0 20%;
+    background: black;
+    list-style: none;
+    padding: min(20rem, 15vh) 2rem;
+    margin: 0;
+    flex-direction: column;
+}
+
+.primary-navigation a {
+    text-decoration: none;
+}
+
+.primary-navigation a > span {
+    font-weight: 700;
+    margin-right: .5em;
+}
+
 /* --------------- testing ---------------- */
 
 .debug {
