@@ -60,8 +60,8 @@ const NavStyle = styled.nav`
 		}
 		& > .button {
 			display: flex;
-			align-items: center;
-			justify-content: center;
+			/* align-items: center; */
+			/* justify-content: center; */
 			width: 3rem;
 			height: 3rem;
 			position: absolute;
@@ -75,9 +75,10 @@ const NavStyle = styled.nav`
 			}
 		}
 		& > ul {
+			/* height: 100vh; */
 			--underline-gap: 0.5rem;
 			position: fixed;
-			z-index: 1000;
+			z-index: 10000000;
 			inset: 0 0 0 30%;
 			list-style: none;
 			padding: min(20rem, 15vh) 2rem;
@@ -98,6 +99,7 @@ const NavStyle = styled.nav`
 			}
 		}
 		&.open {
+			position: relative;
 			& > ul {
 				transform: translateX(0);
 				z-index: 200;
